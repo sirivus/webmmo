@@ -1,6 +1,7 @@
 import _ from "lodash";
 import "./style.css";
-import Icon from "./icon.png";
+import Icon from "./background.jpg";
+import favicon from "./favicon.ico";
 import Data from "./data.xml";
 import Notes from "./data.csv";
 import toml from './data.toml';
@@ -26,12 +27,15 @@ function component() {
   // Add the image to our existing div.
   const myIcon = new Image();
   myIcon.src = Icon;
+  //const myfavicon = new Image();
+  //myfavicon.src = favicon;
 
   btn.innerHTML = "Click me and check the console!";
   btn.onclick = printMe;
 
   element.appendChild(btn);
   element.appendChild(myIcon);
+  //element.appendChild(myfavicon);
 
   console.log(Data);
   console.log(Notes);

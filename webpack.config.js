@@ -2,44 +2,44 @@ const path = require("path");
 const toml = require("toml");
 const yaml = require("yamljs");
 const json5 = require("json5");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via npm
+//const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
+const webpack = require('webpack'); // to access built-in plugins
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    index: "./src/index.js",
+    print: "./src/print.js",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-
         use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-
         type: "asset/resource",
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-
         type: "asset/resource",
       },
       {
         test: /\.(csv|tsv)$/i,
-
         use: ["csv-loader"],
       },
 
       {
         test: /\.xml$/i,
-
         use: ["xml-loader"],
       },
       {
         test: /\.toml$/i,
-
         type: "json",
 
         parser: {
@@ -49,7 +49,6 @@ module.exports = {
 
       {
         test: /\.yaml$/i,
-
         type: "json",
 
         parser: {
@@ -59,7 +58,6 @@ module.exports = {
 
       {
         test: /\.json5$/i,
-
         type: "json",
 
         parser: {
@@ -68,4 +66,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.ProgressPlugin(),
+    //new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new CleanWebpackPlugin(),
+  ],
 };

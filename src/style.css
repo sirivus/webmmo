@@ -7,13 +7,8 @@
 }
 
 .hello {
-  color: red;
+  color: blue;
   font-family: 'MyFont';
-}
-
-.background {
-  background: url('./background.jpg');
-  background-repeat: no-repeat;
 }
 
 /*

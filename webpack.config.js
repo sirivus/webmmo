@@ -3,11 +3,11 @@ const toml = require("toml");
 const yaml = require("yamljs");
 const json5 = require("json5");
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
-const { isContext } = require("vm");
+const { isContext } = require("vm"); //https://www.geeksforgeeks.org/node-js-vm-runincontext-method/
 const { title } = require("process");
 
 module.exports = {
-  mode: "development", //development
+  mode: "production", //development or production set
   entry: {
     print: "./src/print.js",
     index: {
@@ -25,10 +25,43 @@ module.exports = {
     }),
   ],
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
     publicPath: "/",
+    library: {
+      name: "webpackNumbers",
+      type: "umd",
+    },
+  },
+  externals: {
+    externals: [
+      // "library/one",
+      // "library/two",
+      //  Everything that starts with "library/"
+      // /^library\/.+$/,
+    ],
+    lodash: {
+      commonjs: "lodash",
+      commonjs2: "lodash",
+      amd: "lodash",
+      root: "_",
+    },
+  },
+  optimization: {
+    moduleIds: "deterministic",
+    runtimeChunk: "single",
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+
+          name: "vendors",
+
+          chunks: "all",
+        },
+      },
+    },
   },
   module: {
     rules: [

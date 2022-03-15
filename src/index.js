@@ -1,7 +1,6 @@
 import _ from "lodash";
 import "./style.css";
 import Icon from "./background.jpg";
-import favicon from "./favicon.ico";
 import Data from "./data.xml";
 import Notes from "./data.csv";
 import toml from './data.toml';
@@ -23,6 +22,7 @@ function component() {
   // Lodash, now imported by this script
   element.innerHTML = _.join(["Hello", "webpack"], " ");
   element.classList.add("hello"); //style.css import
+  element.classList.add("background"); //style.css import
 
   // Add the image to our existing div.
   const myIcon = new Image();
@@ -40,8 +40,6 @@ function component() {
   console.log(Data);
   console.log(Notes);
 
-  
-  
   return element;
 }
 

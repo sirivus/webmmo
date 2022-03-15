@@ -9,5 +9,16 @@
 .hello {
   color: red;
   font-family: 'MyFont';
-  background: url('./background.jpg');
 }
+
+.background {
+  background: url('./background.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+/*
+div.background {
+    opacity: 0.6;
+}
+*/

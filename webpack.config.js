@@ -2,21 +2,32 @@ const path = require("path");
 const toml = require("toml");
 const yaml = require("yamljs");
 const json5 = require("json5");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via npm
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
-const webpack = require('webpack'); // to access built-in plugins
 const { isContext } = require("vm");
 const { title } = require("process");
 
 module.exports = {
+  mode: "development", //development
   entry: {
     index: "./src/index.js",
     print: "./src/print.js",
+    another: "./src/another-module.js",
   },
+  devtool: "inline-source-map", //development
+  devServer: {
+    static: "./dist",
+  }, //This tells webpack-dev-server to serve the files from the dist directory on localhost:8080.
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Project SIRI",
+      favicon: "./src/favicon.ico",
+    }),
+  ],
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -66,12 +77,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Project SIRI",
-      favicon: "./src/favicon.ico",
-    }),
-    //new CleanWebpackPlugin(),
-    //new webpack.ProgressPlugin(),
-  ],
 };

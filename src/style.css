@@ -13,10 +13,14 @@
 
 .background {
   background: url('./background.jpg');
-  background-size: 100%;
   background-repeat: no-repeat;
 }
 
+/*
+  margin: 0;
+  width:100px;
+  height:auto;
+*/
 /*
 div.background {
     opacity: 0.6;

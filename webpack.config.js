@@ -9,9 +9,10 @@ const { title } = require("process");
 module.exports = {
   mode: "development", //development
   entry: {
-    index: "./src/index.js",
     print: "./src/print.js",
-    another: "./src/another-module.js",
+    index: {
+      import: "./src/index.js",
+    },
   },
   devtool: "inline-source-map", //development
   devServer: {

@@ -3,8 +3,10 @@ const toml = require("toml");
 const yaml = require("yamljs");
 const json5 = require("json5");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via npm
-//const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
 const webpack = require('webpack'); // to access built-in plugins
+const { isContext } = require("vm");
+const { title } = require("process");
 
 module.exports = {
   entry: {
@@ -14,6 +16,7 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
   module: {
     rules: [
@@ -22,7 +25,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
         type: "asset/resource",
       },
       {
@@ -41,7 +44,6 @@ module.exports = {
       {
         test: /\.toml$/i,
         type: "json",
-
         parser: {
           parse: toml.parse,
         },
@@ -50,7 +52,6 @@ module.exports = {
       {
         test: /\.yaml$/i,
         type: "json",
-
         parser: {
           parse: yaml.parse,
         },
@@ -59,7 +60,6 @@ module.exports = {
       {
         test: /\.json5$/i,
         type: "json",
-
         parser: {
           parse: json5.parse,
         },
@@ -67,8 +67,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.ProgressPlugin(),
-    //new HtmlWebpackPlugin({ template: "./src/index.html" }),
-    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "Project SIRI",
+      favicon: "./src/favicon.ico",
+    }),
+    //new CleanWebpackPlugin(),
+    //new webpack.ProgressPlugin(),
   ],
 };

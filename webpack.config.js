@@ -7,7 +7,7 @@ const { isContext } = require("vm"); //https://www.geeksforgeeks.org/node-js-vm-
 const { title } = require("process");
 
 module.exports = {
-  mode: "production", //development or production set
+  mode: "development", //development or production set
   entry: {
     print: "./src/print.js",
     index: {

@@ -10,6 +10,7 @@ import Print from "./print";
 import numRef from "./ref.json";
 
 //__webpack_nonce__ = "c29tZSBjb29sIHN0cmluZyB3aWxsIHBvcCB1cCAxMjM=";
+//__webpack_nonce__ = "<%=nonce%>";
 
 console.log(toml.title); // output `TOML Example`
 console.log(toml.owner.name); // output `Tom Preston-Werner`

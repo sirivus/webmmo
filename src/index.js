@@ -1,11 +1,15 @@
-import _ from "lodash";
+//import  has  from "lodash";
+const _ = require("lodash");
+//node_modules / lodash / fp;
+//const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+//import has from "./chicken.js";
 import "./style.css";
 import background from "./background.jpg";
 import Data from "./data.xml";
 import Notes from "./data.csv";
-import toml from './data.toml';
-import yaml from './data.yaml';
-import json from './data.json5';
+import toml from "./data.toml";
+import yaml from "./data.yaml";
+import json from "./data.json5";
 import Print from "./print";
 import numRef from "./ref.json";
 
@@ -21,7 +25,7 @@ console.log(json.owner.name); // output `Tom Preston-Werner`
 
 async function getComponent() {
   const element = document.createElement("div");
-  const { default: _ } = await import("lodash");
+  const { _ } = await import("lodash");
   const btn = document.createElement("button");
 
   // Lodash, now imported by this script
@@ -50,16 +54,16 @@ getComponent().then((component) => {
 //
 
 //async function component2() {
-//  
+//
 //  const element = document.createElement("div");
 //  const { default: _ } = await import("lodash");
-//  
+//
 //  src = "https://example.org/webpack-numbers.js";
 //
 //  const webpackNumbers = require("webpack-numbers");
 //  // ...
 //  webpackNumbers.wordToNum("Two");
-//  
+//
 //  require(["webpackNumbers"], function (webpackNumbers) {
 //    // ...
 //    webpackNumbers.wordToNum("Two");

@@ -1,13 +1,14 @@
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const path = require("path");
 const toml = require("toml");
 const yaml = require("yamljs");
 const json5 = require("json5");
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // installed via npm
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // installed via npm
 const { isContext } = require("vm"); //https://www.geeksforgeeks.org/node-js-vm-runincontext-method/
 const { title } = require("process");
 
 module.exports = {
-  mode: "development", //development or production set
+  mode: "production", //development or production set
   entry: {
     print: "./src/print.js",
     index: {
@@ -19,6 +20,10 @@ module.exports = {
     static: "./dist",
   }, //This tells webpack-dev-server to serve the files from the dist directory on localhost:8080.
   plugins: [
+    new LodashModuleReplacementPlugin({
+      'collections': true,
+      'paths': true
+    }),
     new HtmlWebpackPlugin({
       title: "Project SIRI",
       favicon: "./src/favicon.ico",
@@ -65,6 +70,16 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        'use': 'babel-loader',
+        'test': /\.js$/,
+        'exclude': /node_modules/,
+        //'options': {
+        //  'plugins': ['lodash'],
+        //  'presets': [['env', { 'modules': false, 'targets': { 'node': 4 } }]]
+        //}
+      },
+
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
